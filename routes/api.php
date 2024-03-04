@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,9 +25,10 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('me', [AuthController::class, 'me']);
 });
 
-// Payment
-    Route::get('payments', [PaymentController::class, 'all']);
-    Route::get('payments/{id}', [PaymentController::class, 'find']);
-    Route::delete('payments/{id}', [PaymentController::class, 'destroy']);
-    Route::patch('payments/{id}', [PaymentController::class, 'confirmPayment']);
-    Route::post('payments', [PaymentController::class, 'create']);
+Route::get('products', [ProductController::class, 'all']);
+
+Route::post('sales', [SaleController::class, 'create']);
+Route::get('sales', [SaleController::class, 'all']);
+Route::get('sales/{id}', [SaleController::class, 'find']);
+Route::delete('sales/{id}', [SaleController::class, 'destroy']);
+Route::post('sales/products', [SaleController::class, 'addProductsToSale']);
