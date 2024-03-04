@@ -3,21 +3,22 @@
 namespace Tests\Unit\Repository;
 
 use App\Models\Payer;
-use App\Repositories\PayerRepository;
+use App\Models\Sale;
+use App\Repositories\SaleRepository;
 use Illuminate\Container\Container;
 use PHPUnit\Framework\TestCase;
 
-class PayerRepositoryTest extends TestCase
+class SaleRepositoryTest extends TestCase
 {
     public function testExistsModel()
     {
-        $this->assertTrue(class_exists('App\Repositories\PayerRepository'));
+        $this->assertTrue(class_exists('App\Repositories\SaleRepository'));
     }
 
     public function testModel()
     {
-        $repository = new PayerRepository(new Container);
+        $repository = new SaleRepository(new Container);
 
-        $this->assertEquals(Payer::class, $repository->model());
+        $this->assertEquals(Sale::class, $repository->model());
     }
 }
