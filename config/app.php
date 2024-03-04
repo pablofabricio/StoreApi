@@ -197,7 +197,6 @@ return [
         L5Swagger\L5SwaggerServiceProvider::class,
 
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
-        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
     ],
 
     /*

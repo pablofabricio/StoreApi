@@ -17,14 +17,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::group(['prefix' => 'auth'], function () {
-    Route::post('login', [AuthController::class, 'login'])->withoutMiddleware('auth-jwt')->name('auth.jwt');
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('refresh', [AuthController::class, 'refresh']);
-    Route::post('me', [AuthController::class, 'me']);
-});
-
 Route::get('products', [ProductController::class, 'all']);
 
 Route::post('sales', [SaleController::class, 'create']);

@@ -9,60 +9,6 @@
         }
     ],
     "paths": {
-        "login": {
-            "post": {
-                "tags": ["Authentication"],
-                "summary": "User login",
-                "description": "Authenticate a user and generate an access token.",
-                "parameters": [],
-                "requestBody": {
-                  "required": true,
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "object",
-                        "properties": {
-                          "email": { "type": "string" },
-                          "password": { "type": "string" }
-                        },
-                        "required": ["email", "password"]
-                      }
-                    }
-                  }
-                },
-                "responses": {
-                  "200": {
-                    "description": "Successful login",
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                              "access_token": { "type": "string" },
-                              "token_type": { "type": "string" },
-                              "expires_in": { "type": "integer" }
-                            }
-                        }
-                      }
-                    }
-                  },
-                  "401": {
-                    "description": "Unauthorized",
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "type": "object",
-                          "properties": {
-                            "error": { "type": "string" }
-                          },
-                          "required": ["error"]
-                        }
-                      }
-                    }
-                  }
-                }
-            }
-        },
         "payments": {
             "get": {
                 "tags": [
