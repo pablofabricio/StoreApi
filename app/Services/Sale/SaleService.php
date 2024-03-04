@@ -73,8 +73,6 @@ class SaleService
         } catch (Exception $e) {
             DB::rollback();
 
-            die($e);
-
             throw new \Exception('Invalid sale provided.The possible reasons are: A field of the provided sale was null or with invalid values', 422);
         }
 
@@ -113,8 +111,6 @@ class SaleService
             DB::commit();
         } catch (Exception $e) {
             DB::rollback();
-
-            die($e);
 
             throw new \Exception('Invalid sale provided.The possible reasons are: A field of the provided sale was null or with invalid values', 422);
         }

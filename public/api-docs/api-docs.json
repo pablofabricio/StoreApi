@@ -9,258 +9,261 @@
         }
     ],
     "paths": {
-        "payments": {
-            "get": {
-                "tags": [
-                    "Payment"
-                ],
-                "summary": "Retrieve all payments",
-                "description": "The purpose of this method is to retrieve all payment records.",
-                "parameters": [],
-                "responses": {
-                  "200": {
-                    "description": "Successful response",
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": { "type": "string" },
-                                "status": { "type": "string" },
-                                "transaction_amount": { "type": "string" },
-                                "installments": { "type": "integer" },
-                                "token": { "type": "string" },
-                                "payment_method_id": { "type": "string" },
-                                "payer": {
-                                  "type": "object",
-                                  "properties": {
-                                    "entity_type": { "type": "string" },
-                                    "type": { "type": "string" },
-                                    "email": { "type": "string" },
-                                    "identification": {
-                                      "type": "object",
-                                      "properties": {
-                                        "type": { "type": "string" },
-                                        "number": { "type": "string" }
-                                      }
-                                    }
-                                  }
-                                },
-                                "notification_url": { "type": "string" },
-                                "created_at": { "type": "string", "format": "date-time" },
-                                "updated_at": { "type": "string", "format": "date-time" }
-                              }
-                            }
-                        }
+      "products": {
+        "get": {
+          "tags": [
+              "Product"
+          ],
+          "summary": "Retrieve all products",
+          "description": "The purpose of this method is to retrieve all product records.",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string" },
+                        "name": { "type": "string" },
+                        "description": { "type": "string" },
+                        "price": { "type": "number" },
+                        "created_at": { "type": "string", "format": "date-time" },
+                        "updated_at": { "type": "string", "format": "date-time" }
                       }
                     }
-                  },
-                  "403": {
-                    "description": "Forbidden"
                   }
                 }
-            },
-            "post": {
-                "tags": [
-                    "Payment"
-                  ],
-                  "summary": "Create a new payment",
-                  "description": "The purpose of this method is to create a new payment record.",
-                  "parameters": [],
-                  "requestBody": {
-                    "required": true,
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "type": "object",
-                          "properties": {
-                            "transaction_amount": { "type": "number" },
-                            "installments": { "type": "integer" },
-                            "token": { "type": "string" },
-                            "payment_method_id": { "type": "string" },
-                            "payer": {
-                              "type": "object",
-                              "properties": {
-                                "email": { "type": "string" },
-                                "identification": {
-                                  "type": "object",
-                                  "properties": {
-                                    "type": { "type": "string" },
-                                    "number": { "type": "string" }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "responses": {
-                    "201": {
-                      "description": "Created",
-                      "content": {
-                        "application/json": {
-                          "schema": {
+              }
+            }
+          }
+        }
+      },
+      "sales": {
+        "get": {
+          "tags": [
+              "Sale"
+          ],
+          "summary": "Retrieve all sales",
+          "description": "The purpose of this method is to retrieve all sale records.",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "sales_id": { "type": "integer" },
+                        "amount": { "type": "number" },
+                        "products": {
+                          "type": "array",
+                          "items": {
                             "type": "object",
                             "properties": {
-                              "id": { "type": "string" },
-                              "created_at": { "type": "string", "format": "date-time" }
+                              "product_id": { "type": "integer" },
+                              "name": { "type": "string" },
+                              "price": { "type": "number" },
+                              "amount": { "type": "integer" }
                             }
                           }
                         }
                       }
-                    },
-                    "400": {
-                      "description": "payment not provided in the request body"
-                    },
-                    "403": {
-                      "description": "Forbidden"
-                    },
-                    "422": {
-                      "description": "Invalid payment provided"
                     }
+                  }
                 }
+              }
             }
+          }
         },
-        "payments/{id}": {
-            "get": {
-                "tags": [
-                  "Payment"
+        "post": {
+          "tags": ["Sale" ],
+          "summary": "Create a new sale",
+          "description": "The purpose of this method is to create a new sale record.",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "integer" },
+                          "amount": { "type": "integer" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "string" },
+                      "created_at": { "type": "string", "format": "date-time" }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "sale not provided in the request body"
+            },
+            "422": {
+              "description": "Invalid sale provided"
+            }
+          }
+        }
+      },
+      "sales/{id}": {
+        "get": {
+            "tags": [
+              "Sale"
+            ],
+            "summary": "Retrieve a sale by ID",
+            "description": "The purpose of this method is to retrieve a sale record by its ID.",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The ID of the sale to retrieve"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Successful response",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "sales_id": { "type": "string" },
+                        "amount": { "type": "number" },
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "product_id": { "type": "integer" },
+                              "name": { "type": "string" },
+                              "price": { "type": "number" },
+                              "amount": { "type": "integer" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Not Found"
+              }
+            }
+          },
+          "delete": {
+              "tags": [
+                  "Sale"
                 ],
-                "summary": "Retrieve a payment by ID",
-                "description": "The purpose of this method is to retrieve a payment record by its ID.",
+                "summary": "Cancel a sale by ID",
+                "description": "The purpose of this method is to cancel a sale by its ID.",
                 "parameters": [
                   {
                     "name": "id",
                     "in": "path",
+                    "description": "ID of the sale to cancel",
                     "required": true,
                     "schema": {
                       "type": "string"
-                    },
-                    "description": "The ID of the payment to retrieve"
+                    }
                   }
                 ],
                 "responses": {
-                  "200": {
-                    "description": "Successful response",
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "type": "object",
-                          "properties": {
-                            "id": { "type": "string" },
-                            "status": { "type": "string" },
-                            "transaction_amount": { "type": "string" },
-                            "installments": { "type": "integer" },
-                            "token": { "type": "string" },
-                            "payment_method_id": { "type": "string" },
-                            "payer": {
-                              "type": "object",
-                              "properties": {
-                                "entity_type": { "type": "string" },
-                                "type": { "type": "string" },
-                                "email": { "type": "string" },
-                                "identification": {
-                                  "type": "object",
-                                  "properties": {
-                                    "type": { "type": "string" },
-                                    "number": { "type": "string" }
-                                  }
-                                }
-                              }
-                            },
-                            "notification_url": { "type": "string" },
-                            "created_at": { "type": "string", "format": "date-time" },
-                            "updated_at": { "type": "string", "format": "date-time" }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "403": {
-                    "description": "Forbidden"
+                  "204": {
+                    "description": "No Content"
                   },
                   "404": {
                     "description": "Not Found"
                   }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Payment"
-                  ],
-                  "summary": "Cancel a payment by ID",
-                  "description": "The purpose of this method is to cancel a payment by its ID. The status of the payment will be set to 'canceled'.",
-                  "parameters": [
-                    {
-                      "name": "id",
-                      "in": "path",
-                      "description": "ID of the payment to cancel",
-                      "required": true,
-                      "schema": {
-                        "type": "string"
+              }
+          }
+      },
+      "sales/products/": {
+        "post": {
+        "tags": [
+            "Sale"
+          ],
+        "summary": "Add new products to sale",
+        "description": "The purpose of this method is to add new products to sale record.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sales_id": { "type": "integer" },
+                  "products": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "integer" },
+                        "amount": { "type": "integer" }
                       }
                     }
-                  ],
-                  "responses": {
-                    "204": {
-                      "description": "No Content"
-                    },
-                    "403": {
-                      "description": "Forbidden"
-                    },
-                    "404": {
-                      "description": "Not Found"
-                    }
+                  }
                 }
-            },
-            "patch": {
-                "tags": [
-                    "Payment"
-                  ],
-                  "summary": "Update payment status",
-                  "description": "This method updates the status of a payment.",
-                  "parameters": [
-                    {
-                      "name": "id",
-                      "in": "path",
-                      "description": "ID of the payment to be updated",
-                      "required": true,
-                      "schema": {
-                        "type": "string"
-                      }
-                    }
-                  ],
-                  "requestBody": {
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "type": "object",
-                          "properties": {
-                            "status": {
-                              "type": "string",
-                              "example": "PAID"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "responses": {
-                    "204": {
-                      "description": "No Content"
-                    },
-                    "403": {
-                      "description": "Forbidden"
-                    },
-                    "404": {
-                      "description": "Not Found"
-                    }
-                }
+              }
             }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "updated_at": { "type": "string", "format": "date-time" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "sale not provided in the request body"
+          },
+          "422": {
+            "description": "Invalid sale provided"
+          }
         }
+      }
     }
+  }
 }
