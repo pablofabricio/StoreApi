@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Models\Payment;
+use App\Models\Product;
 use Prettus\Repository\Eloquent\BaseRepository;
 
-class PaymentRepository extends BaseRepository
+class ProductRepository extends BaseRepository
 {
     public function model()
     {
-        return Payment::class;
+        return Product::class;
     }
 }
